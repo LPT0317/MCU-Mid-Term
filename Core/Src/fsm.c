@@ -23,7 +23,7 @@
 
 //Time
 #define AUTO_TIME 10000
-#define DEC_TIME 500
+#define DEC_TIME 1000
 #define BLINK_TIME 500
 /* Init -----*/
 //counter for FSM
