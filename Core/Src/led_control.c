@@ -21,10 +21,16 @@ uint16_t offSEG7[10] = {0x0040, 0x0079, 0x0024, 0x0030, 0x0019,
 		             0x0012, 0x0002, 0x0078, 0x0000, 0x0010};
 
 /* Function -----*/
-//open LED index
-void openLED(int index) {
+//turn on LED index
+void LED_on(int index) {
   if(checkIndex(index, NO_LED)) {
     HAL_GPIO_WritePin(GPIOA, LED[index], RESET);
+  }
+}
+//turn off LED[index]
+void LED_off(int index) {
+  if(checkIndex(index, NO_LED)) {
+	HAL_GPIO_WritePin(GPIOA, LED[index], SET);
   }
 }
 //display 7 SEGMENT LED

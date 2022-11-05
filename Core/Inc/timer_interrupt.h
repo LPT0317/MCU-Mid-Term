@@ -13,7 +13,8 @@
 
 /* Define -----*/
 //Long press timer
-#define LONG_PRESSED_TIMER 0
+#define AUTO_DEC_TIMER 0
+#define BLINK_TIMER 1
 
 /* Function -----*/
 //Set timer for counter[index]

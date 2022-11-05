@@ -17,5 +17,6 @@
 /* Function -----*/
 //Run state machine
 void fsm_simple_buttons_run(void);
+void fsm_led_blinky(void);
 
 #endif /* INC_FSM_H_ */

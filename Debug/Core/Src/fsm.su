@@ -1,3 +1,4 @@
-fsm.c:31:6:inc_counter	4	static
-fsm.c:38:6:dec_counter	4	static
-fsm.c:45:6:fsm_simple_buttons_run	8	static
+fsm.c:38:6:inc_counter	4	static
+fsm.c:45:6:dec_counter	4	static
+fsm.c:52:6:fsm_simple_buttons_run	8	static
+fsm.c:116:6:fsm_led_blinky	8	static

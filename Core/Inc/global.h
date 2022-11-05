@@ -17,7 +17,7 @@
 //Time unit 1s = 1000ms
 #define TIME_UNIT 1000
 //Number of timer
-#define NO_TIMER 1
+#define NO_TIMER 2
 
 /* LED -----*/
 //Number of LED

@@ -101,6 +101,7 @@ int main(void)
   while (1)
   {
 	fsm_simple_buttons_run();
+	fsm_led_blinky();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

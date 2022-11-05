@@ -12,9 +12,15 @@
 #include "main.h"
 #include "global.h"
 
+/* Define -----*/
+//LED_Pin
+#define LED_RED 0
+
 /* Function -----*/
-//open LED index
-void openLED(int index);
+//turn on LED index
+void LED_on(int index);
+//turn off LED[index]
+void LED_off(int index);
 //display 7 SEGMENT LED
 void display7SEG(int num);
 
