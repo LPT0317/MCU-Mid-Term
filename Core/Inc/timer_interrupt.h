@@ -11,7 +11,9 @@
 /* Include -----*/
 #include "global.h"
 
-/* Init -----*/
+/* Define -----*/
+//Long press timer
+#define LONG_PRESSED_TIMER 0
 
 /* Function -----*/
 //Set timer for counter[index]

@@ -9,10 +9,9 @@
 #include "global.h"
 
 /* Finite state machine -----*/
-//counter for FSM
-int counter = 0;
 
 /* Function -----*/
+//Check index (0 <= Index < max)
 int checkIndex(int index, int max) {
   if(index >= 0 && index < max) {
 	return 1;

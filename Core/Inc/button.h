@@ -24,6 +24,7 @@ void getKeyInput();
 /* Check button is pressed or not
  * Check button[index]
  */
-int isButtonPressed(int index);
+int isButtonPressed(int index);//single pressed
+int isButtonLongPressed(int index);//long pressed
 
 #endif /* INC_BUTTON_H_ */

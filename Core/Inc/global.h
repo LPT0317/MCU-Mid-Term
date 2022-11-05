@@ -28,8 +28,6 @@
 #define NO_BUTTON 3
 
 /* Finite state machine -----*/
-//counter for FSM
-extern int counter;
 
 /* Check function */
 //Check index (0 <= Index < max)

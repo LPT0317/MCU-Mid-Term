@@ -12,6 +12,7 @@
 #include "global.h"
 #include "button.h"
 #include "led_control.h"
+#include "timer_interrupt.h"
 
 /* Function -----*/
 //Run state machine

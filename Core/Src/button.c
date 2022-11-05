@@ -21,7 +21,10 @@ uint16_t BUTTON[NO_BUTTON] = {RESET_Pin, INC_Pin, DEC_Pin};
  * Array with size = NUM_BUTTON
  * example button_flag[0]: check flag on button 0;
  */
-int button_flag[NO_BUTTON] = {0};
+int button_flag[NO_BUTTON] = {0}; //single press
+int button_long_flag[NO_BUTTON] = {0}; //long press
+/* Counter for long press */
+int counter_longpress[NO_BUTTON] = {300};
 /* Debounce var
  * Save the past state of button
  * debounce 3 time
@@ -53,7 +56,10 @@ void getKeyInput() {
       else {
         TimeOutForKeyPress[i]--;
         if(TimeOutForKeyPress[i] == 0) {
-          KeyReg3[i] = NORMAL_STATE;
+          if(KeyReg3[i] == PRESSED_STATE) {
+            TimeOutForKeyPress[i] = 100;
+            button_flag[i] = 1;
+          }
         }
       }
     }
