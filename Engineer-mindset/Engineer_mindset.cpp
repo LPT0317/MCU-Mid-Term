@@ -20,7 +20,7 @@ string getDecimal(double number) {
   else if(number < 100) {
     result = "0" + to_string(number);
   }
-  else if(number < 1000) {
+  else {
     result = to_string(number);
   }
   result = eraseDecimal0(result);
@@ -89,10 +89,13 @@ string suffixWithUnit(double number) {
   int index = 0;
   double res = number;
   string decimal = "";
+  double decimal_num = res - floor(res);
+  decimal_num = decimal_num * 1000000;
+  decimal = getDecimal(decimal_num) + decimal;
   res = floor(res);
   while(res >= 1000) {
     res = res / 1000;
-    double decimal_num = res - floor(res);
+    decimal_num = res - floor(res);
     decimal_num = decimal_num * 1000;
     decimal = getDecimal(decimal_num) + decimal;
     res = floor(res);
@@ -112,14 +115,20 @@ string suffixWithUnit(double number) {
   else if(index == 6) result += " Exa";
   return result;
 }
+
 int main() {
-  double num = 0;
-  while(1) {
-    cout << "Import Input < 0 for out." << endl;
-    cout << "Input = ";
-    cin >> num;
-    cout << suffixWithUnit(num) << endl;
-    if(num < 0) break;
-  }
+//   double num = 0;
+//   while(1) {
+//     cout << "Import Input < 0 for out." << endl;
+//     cout << "Input = ";
+//     cin >> num;
+//     if(num < 0) break;
+//     cout << suffixWithUnit(num) << endl;
+//   }
+  cout << suffixWithUnit(123) << endl;
+  cout << suffixWithUnit(1234) << endl;
+  cout << suffixWithUnit(12345) << endl;
+  cout << suffixWithUnit(1234567) << endl;
+  cout << suffixWithUnit(12345678) << endl;
   return 0;
 }
