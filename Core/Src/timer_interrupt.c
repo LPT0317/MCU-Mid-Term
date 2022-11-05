@@ -10,7 +10,7 @@
 
 /* Init -----*/
 //Counter for all timer
-int counter[NO_TIMER] = {0};
+int counterTimer[NO_TIMER] = {0};
 //Flag for all timer
 int flag[NO_TIMER] = {0};
 
@@ -18,7 +18,7 @@ int flag[NO_TIMER] = {0};
 //Set timer for counter[index]
 void setTimer(int duration, int index) {
   if(checkIndex(index, NO_TIMER) == 1) {
-    counter[index] = duration / TIME_CYCLE;
+    counterTimer[index] = duration / TIME_CYCLE;
     flag[index] = 0;
   }
 }
@@ -37,11 +37,11 @@ int isTimerOut(int index) {
 //Run Timer
 void timerRun(void) {
   for(int i = 0; i < NO_TIMER; i++) {
-    if(counter[i] > 0) {
-      counter[i]--;
-      if(counter[i] <= 0) {
+    if(counterTimer[i] > 0) {
+      counterTimer[i]--;
+      if(counterTimer[i] <= 0) {
         flag[i] = 1;
-        counter[i] = 0;
+        counterTimer[i] = 0;
       }
     }
   }

@@ -21,15 +21,17 @@
 
 /* LED -----*/
 //Number of LED
-#define NO_LED 3
+#define NO_LED 1
 
 /* Button -----*/
 //Number of button
-#define NO_BUTTON 1
+#define NO_BUTTON 3
 
 /* Finite state machine -----*/
+//counter for FSM
+extern int counter;
 
 /* Check function */
-//Check index
+//Check index (0 <= Index < max)
 int checkIndex(int index, int max);
 #endif /* INC_GLOBAL_H_ */

@@ -10,18 +10,18 @@
 
 /* Define -----*/
 /* Pull-up button */
-#define PRESSED_STATE RESET
-#define NORMAL_STATE SET
+#define PRESSED_STATE 0
+#define NORMAL_STATE 1
 
 /* Init -----*/
 //Button Pin
-uint16_t BUTTON[NO_BUTTON] = {0x0000};
+uint16_t BUTTON[NO_BUTTON] = {RESET_Pin, INC_Pin, DEC_Pin};
 /* Flag for button
  * Check button state
  * Array with size = NUM_BUTTON
  * example button_flag[0]: check flag on button 0;
  */
-int button_flag[NO_BUTTON] = {0};
+int button_buffer[NO_BUTTON] = {0};
 /* Debounce var
  * Save the past state of button
  * debounce 3 time
@@ -45,10 +45,7 @@ void getKeyInput() {
     if((KeyReg1[i] == KeyReg0[i]) && (KeyReg1[i] == KeyReg2[i])) {
       if(KeyReg3[i] != KeyReg2[i]) {
 	    KeyReg3[i] = KeyReg2[i];
-	    if(KeyReg3[i] == PRESSED_STATE) {
-		  timeOut[i] = 200;
-		  button_flag[i] = 1;
-	    }
+	    button_buffer[i] = KeyReg3[i];
       }
       else {
 	    timeOut[i]--;
@@ -65,10 +62,7 @@ void getKeyInput() {
  */
 int isButtonPressed(int index) {
   if(checkIndex(index, NO_BUTTON)) {
-    if(button_flag[index] == 1) {
-	  button_flag[index] = 0;
-      return 1;
-    }
+    return (button_buffer[index] == PRESSED_STATE);
   }
   return 0;
 }

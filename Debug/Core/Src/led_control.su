@@ -1,2 +1,2 @@
-led_control.c:23:6:openLED	16	static
-led_control.c:29:6:display7SEG	16	static
+led_control.c:25:6:openLED	16	static
+led_control.c:31:6:display7SEG	16	static

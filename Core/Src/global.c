@@ -8,6 +8,10 @@
 /* Include -----*/
 #include "global.h"
 
+/* Finite state machine -----*/
+//counter for FSM
+int counter = 0;
+
 /* Function -----*/
 int checkIndex(int index, int max) {
   if(index >= 0 && index < max) {

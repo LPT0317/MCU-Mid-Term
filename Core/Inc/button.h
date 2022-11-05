@@ -11,6 +11,11 @@
 /* Include -----*/
 #include "global.h"
 
+/* Define -----*/
+#define RESET_BUTTON 0
+#define INC_BUTTON 1
+#define DEC_BUTTON 2
+
 /* Function -----*/
 /* Button reading and debounce */
 //debounce button
