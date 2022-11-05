@@ -8,6 +8,7 @@ string getDecimal(double number);
 string eraseDecimal0(string number);
 string eraseInteger0(string number);
 string eraseLast0(string number);
+bool findDecimal(string number);
 string suffixWithUnit(double number);
 
 string getDecimal(double number) {
@@ -58,21 +59,30 @@ string eraseInteger0(string number) {
 }
 
 string eraseLast0(string number) {
-  int i = number.size() - 1;
-  while(i >= 0) {
-    if(number[number.size() -1] != '0') {
-      i = -1;
-      break;
+  if(findDecimal(number)) {
+    int i = number.size() - 1;
+    while(i >= 0) {
+      if(number[number.size() -1] != '0') {
+        i = -1;
+        break;
+      }
+      if(number[i] == '.') break;
+      if(number[i] != '0') {
+        i++;
+        break;
+      } 
+      if(number[i] == '0') i--;
     }
-    if(number[i] == '.') break;
-    if(number[i] != '0') {
-      i++;
-      break;
-    }
-    if(number[i] == '0') i--;
+    if(i != -1) number.erase(i, number.size() - 1);
   }
-  if(i != -1) number.erase(i, number.size() - 1);
   return number;
+}
+
+bool findDecimal(string number) {
+  for(int i = 0; i < number.size(); i++) {
+    if(number[i] == '.') return 1;
+  }
+  return 0;
 }
 
 string suffixWithUnit(double number) {
@@ -108,10 +118,8 @@ int main() {
     cout << "Import Input < 0 for out." << endl;
     cout << "Input = ";
     cin >> num;
-    num = 3999999999999999999;
-    cout << to_string(num) << endl;
+    cout << suffixWithUnit(num) << endl;
     if(num < 0) break;
-    break;
   }
   return 0;
 }
