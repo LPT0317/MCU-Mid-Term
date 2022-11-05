@@ -45,7 +45,7 @@ void getKeyInput() {
     if((KeyReg1[i] == KeyReg0[i]) && (KeyReg1[i] == KeyReg2[i])) {
       if(KeyReg3[i] != KeyReg2[i]) {
 	    KeyReg3[i] = KeyReg2[i];
-	    button_buffer[i] = KeyReg3[i];
+	    button_buffer[i] = KeyReg0[i];
       }
       else {
 	    timeOut[i]--;

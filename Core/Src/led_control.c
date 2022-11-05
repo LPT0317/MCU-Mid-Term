@@ -17,8 +17,8 @@ uint16_t LED[NO_LED] = {LED_RED_Pin};
  */
 uint16_t SEG7[10] = {0x003f, 0x0006, 0x005b, 0x004f, 0x0066,
 		             0x006d, 0x007d, 0x0007, 0x007f, 0x006f};
-uint16_t offSEG7[10] = {0x0040, 0x0079, 0x005b, 0x004f, 0x0066,
-		             0x006d, 0x007d, 0x0007, 0x007f, 0x006f};
+uint16_t offSEG7[10] = {0x0040, 0x0079, 0x0024, 0x0030, 0x0019,
+		             0x0012, 0x0002, 0x0078, 0x0000, 0x0010};
 
 /* Function -----*/
 //open LED index
@@ -30,7 +30,7 @@ void openLED(int index) {
 //display 7 SEGMENT LED
 void display7SEG(int num) {
   if(checkIndex(num, 10)) {
-	HAL_GPIO_WritePin(GPIOB, (!SEG7[num]), SET);
+	HAL_GPIO_WritePin(GPIOB, offSEG7[num], SET);
     HAL_GPIO_WritePin(GPIOB, SEG7[num], RESET);
   }
 }

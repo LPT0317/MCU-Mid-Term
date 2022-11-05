@@ -94,18 +94,13 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
-  int i = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	//fsm_simple_buttons_run();
-	display7SEG(i);
-	i++;
-	if(i > 9) i = 0;
-	HAL_Delay(1000);
+	fsm_simple_buttons_run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
