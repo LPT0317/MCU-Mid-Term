@@ -23,8 +23,8 @@
 
 //Time
 #define AUTO_TIME 10000
-#define DEC_TIME 1000
-#define BLINK_TIME 1000
+#define DEC_TIME 500
+#define BLINK_TIME 500
 /* Init -----*/
 //counter for FSM
 int counter = 0;
@@ -48,6 +48,12 @@ void dec_counter(void) {
     counter = 9;
   }
 }
+//Auto decrease counter
+void auto_dec(void) {
+  if(counter > 0) {
+    counter--;
+  }
+}
 //Run state machine
 void fsm_simple_buttons_run(void) {
   switch(status) {
@@ -69,6 +75,7 @@ void fsm_simple_buttons_run(void) {
     }
     if(isTimerOut(AUTO_DEC_TIMER) == 1) {
       status = AUTO_DEC_STATE;
+      auto_dec();
       setTimer(DEC_TIME, AUTO_DEC_TIMER);
     }
     break;
@@ -90,9 +97,7 @@ void fsm_simple_buttons_run(void) {
   case AUTO_DEC_STATE:
 	display7SEG(counter);
 	if(isTimerOut(AUTO_DEC_TIMER) == 1) {
-	  if(counter > 0) {
-	    counter--;
-	  }
+	  auto_dec();
 	  status = AUTO_DEC_STATE;
 	  setTimer(DEC_TIME, AUTO_DEC_TIMER);
 	}
@@ -104,10 +109,6 @@ void fsm_simple_buttons_run(void) {
     }
     if(isButtonPressed(DEC_BUTTON) == 1) {
       status = DEC_STATE;
-    }
-    if(isTimerOut(AUTO_DEC_TIMER) == 1) {
-      status = AUTO_DEC_STATE;
-      setTimer(DEC_TIME, AUTO_DEC_TIMER);
     }
     break;
   }

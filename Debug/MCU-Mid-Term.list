@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  0002007c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00008de2  00000000  00000000  000200a5  2**0
+ 12 .debug_info   00008df4  00000000  00000000  000200a5  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00001a80  00000000  00000000  00028e87  2**0
+ 13 .debug_abbrev 00001a80  00000000  00000000  00028e99  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000a10  00000000  00000000  0002a908  2**3
+ 14 .debug_aranges 00000a18  00000000  00000000  0002a920  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00000918  00000000  00000000  0002b318  2**3
+ 15 .debug_ranges 00000920  00000000  00000000  0002b338  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00016c6b  00000000  00000000  0002bc30  2**0
+ 16 .debug_macro  00016c6b  00000000  00000000  0002bc58  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000b531  00000000  00000000  0004289b  2**0
+ 17 .debug_line   0000b53b  00000000  00000000  000428c3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00081fa4  00000000  00000000  0004ddcc  2**0
+ 18 .debug_str    00081fab  00000000  00000000  0004ddfe  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000cfd70  2**0
+ 19 .comment      00000053  00000000  00000000  000cfda9  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000027e0  00000000  00000000  000cfdc4  2**2
+ 20 .debug_frame  00002800  00000000  00000000  000cfdfc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -329,234 +329,237 @@ void dec_counter(void) {
  8000302:	4770      	bx	lr
  8000304:	200000a4 	.word	0x200000a4
 
-08000308 <fsm_simple_buttons_run>:
+08000308 <auto_dec>:
+//Auto decrease counter
+void auto_dec(void) {
+ 8000308:	b480      	push	{r7}
+ 800030a:	af00      	add	r7, sp, #0
+  if(counter > 0) {
+ 800030c:	4b06      	ldr	r3, [pc, #24]	; (8000328 <auto_dec+0x20>)
+ 800030e:	681b      	ldr	r3, [r3, #0]
+ 8000310:	2b00      	cmp	r3, #0
+ 8000312:	dd04      	ble.n	800031e <auto_dec+0x16>
+    counter--;
+ 8000314:	4b04      	ldr	r3, [pc, #16]	; (8000328 <auto_dec+0x20>)
+ 8000316:	681b      	ldr	r3, [r3, #0]
+ 8000318:	3b01      	subs	r3, #1
+ 800031a:	4a03      	ldr	r2, [pc, #12]	; (8000328 <auto_dec+0x20>)
+ 800031c:	6013      	str	r3, [r2, #0]
+  }
+}
+ 800031e:	bf00      	nop
+ 8000320:	46bd      	mov	sp, r7
+ 8000322:	bc80      	pop	{r7}
+ 8000324:	4770      	bx	lr
+ 8000326:	bf00      	nop
+ 8000328:	200000a4 	.word	0x200000a4
+
+0800032c <fsm_simple_buttons_run>:
 //Run state machine
 void fsm_simple_buttons_run(void) {
- 8000308:	b580      	push	{r7, lr}
- 800030a:	af00      	add	r7, sp, #0
+ 800032c:	b580      	push	{r7, lr}
+ 800032e:	af00      	add	r7, sp, #0
   switch(status) {
- 800030c:	4b63      	ldr	r3, [pc, #396]	; (800049c <fsm_simple_buttons_run+0x194>)
- 800030e:	681b      	ldr	r3, [r3, #0]
- 8000310:	2b0b      	cmp	r3, #11
- 8000312:	f200 80c1 	bhi.w	8000498 <fsm_simple_buttons_run+0x190>
- 8000316:	a201      	add	r2, pc, #4	; (adr r2, 800031c <fsm_simple_buttons_run+0x14>)
- 8000318:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 800031c:	0800034d 	.word	0x0800034d
- 8000320:	08000365 	.word	0x08000365
- 8000324:	080003c3 	.word	0x080003c3
- 8000328:	080003db 	.word	0x080003db
- 800032c:	080003f1 	.word	0x080003f1
- 8000330:	08000499 	.word	0x08000499
- 8000334:	08000499 	.word	0x08000499
- 8000338:	08000499 	.word	0x08000499
- 800033c:	08000499 	.word	0x08000499
- 8000340:	08000499 	.word	0x08000499
- 8000344:	08000499 	.word	0x08000499
- 8000348:	08000407 	.word	0x08000407
+ 8000330:	4b5a      	ldr	r3, [pc, #360]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 8000332:	681b      	ldr	r3, [r3, #0]
+ 8000334:	2b0b      	cmp	r3, #11
+ 8000336:	f200 80ae 	bhi.w	8000496 <fsm_simple_buttons_run+0x16a>
+ 800033a:	a201      	add	r2, pc, #4	; (adr r2, 8000340 <fsm_simple_buttons_run+0x14>)
+ 800033c:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8000340:	08000371 	.word	0x08000371
+ 8000344:	08000389 	.word	0x08000389
+ 8000348:	080003eb 	.word	0x080003eb
+ 800034c:	08000403 	.word	0x08000403
+ 8000350:	08000419 	.word	0x08000419
+ 8000354:	08000497 	.word	0x08000497
+ 8000358:	08000497 	.word	0x08000497
+ 800035c:	08000497 	.word	0x08000497
+ 8000360:	08000497 	.word	0x08000497
+ 8000364:	08000497 	.word	0x08000497
+ 8000368:	08000497 	.word	0x08000497
+ 800036c:	0800042f 	.word	0x0800042f
   case INIT_STATE:
     counter = 0;
- 800034c:	4b54      	ldr	r3, [pc, #336]	; (80004a0 <fsm_simple_buttons_run+0x198>)
- 800034e:	2200      	movs	r2, #0
- 8000350:	601a      	str	r2, [r3, #0]
+ 8000370:	4b4b      	ldr	r3, [pc, #300]	; (80004a0 <fsm_simple_buttons_run+0x174>)
+ 8000372:	2200      	movs	r2, #0
+ 8000374:	601a      	str	r2, [r3, #0]
     status = IDLE_STATE;
- 8000352:	4b52      	ldr	r3, [pc, #328]	; (800049c <fsm_simple_buttons_run+0x194>)
- 8000354:	2201      	movs	r2, #1
- 8000356:	601a      	str	r2, [r3, #0]
+ 8000376:	4b49      	ldr	r3, [pc, #292]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 8000378:	2201      	movs	r2, #1
+ 800037a:	601a      	str	r2, [r3, #0]
     setTimer(AUTO_TIME, AUTO_DEC_TIMER);
- 8000358:	2100      	movs	r1, #0
- 800035a:	f242 7010 	movw	r0, #10000	; 0x2710
- 800035e:	f000 faf3 	bl	8000948 <setTimer>
+ 800037c:	2100      	movs	r1, #0
+ 800037e:	f242 7010 	movw	r0, #10000	; 0x2710
+ 8000382:	f000 fae1 	bl	8000948 <setTimer>
     break;
- 8000362:	e099      	b.n	8000498 <fsm_simple_buttons_run+0x190>
+ 8000386:	e086      	b.n	8000496 <fsm_simple_buttons_run+0x16a>
   case IDLE_STATE:
 	display7SEG(counter);
- 8000364:	4b4e      	ldr	r3, [pc, #312]	; (80004a0 <fsm_simple_buttons_run+0x198>)
- 8000366:	681b      	ldr	r3, [r3, #0]
- 8000368:	4618      	mov	r0, r3
- 800036a:	f000 f929 	bl	80005c0 <display7SEG>
+ 8000388:	4b45      	ldr	r3, [pc, #276]	; (80004a0 <fsm_simple_buttons_run+0x174>)
+ 800038a:	681b      	ldr	r3, [r3, #0]
+ 800038c:	4618      	mov	r0, r3
+ 800038e:	f000 f917 	bl	80005c0 <display7SEG>
     if(isButtonPressed(RESET_BUTTON) == 1) {
- 800036e:	2000      	movs	r0, #0
- 8000370:	f7ff ff82 	bl	8000278 <isButtonPressed>
- 8000374:	4603      	mov	r3, r0
- 8000376:	2b01      	cmp	r3, #1
- 8000378:	d102      	bne.n	8000380 <fsm_simple_buttons_run+0x78>
-      status = RESET_STATE;
- 800037a:	4b48      	ldr	r3, [pc, #288]	; (800049c <fsm_simple_buttons_run+0x194>)
- 800037c:	2202      	movs	r2, #2
- 800037e:	601a      	str	r2, [r3, #0]
-    }
-    if(isButtonPressed(INC_BUTTON) == 1) {
- 8000380:	2001      	movs	r0, #1
- 8000382:	f7ff ff79 	bl	8000278 <isButtonPressed>
- 8000386:	4603      	mov	r3, r0
- 8000388:	2b01      	cmp	r3, #1
- 800038a:	d102      	bne.n	8000392 <fsm_simple_buttons_run+0x8a>
-      status = INC_STATE;
- 800038c:	4b43      	ldr	r3, [pc, #268]	; (800049c <fsm_simple_buttons_run+0x194>)
- 800038e:	2203      	movs	r2, #3
- 8000390:	601a      	str	r2, [r3, #0]
-    }
-    if(isButtonPressed(DEC_BUTTON) == 1) {
- 8000392:	2002      	movs	r0, #2
+ 8000392:	2000      	movs	r0, #0
  8000394:	f7ff ff70 	bl	8000278 <isButtonPressed>
  8000398:	4603      	mov	r3, r0
  800039a:	2b01      	cmp	r3, #1
- 800039c:	d102      	bne.n	80003a4 <fsm_simple_buttons_run+0x9c>
-      status = DEC_STATE;
- 800039e:	4b3f      	ldr	r3, [pc, #252]	; (800049c <fsm_simple_buttons_run+0x194>)
- 80003a0:	2204      	movs	r2, #4
+ 800039c:	d102      	bne.n	80003a4 <fsm_simple_buttons_run+0x78>
+      status = RESET_STATE;
+ 800039e:	4b3f      	ldr	r3, [pc, #252]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 80003a0:	2202      	movs	r2, #2
  80003a2:	601a      	str	r2, [r3, #0]
     }
-    if(isTimerOut(AUTO_DEC_TIMER) == 1) {
- 80003a4:	2000      	movs	r0, #0
- 80003a6:	f000 faf5 	bl	8000994 <isTimerOut>
+    if(isButtonPressed(INC_BUTTON) == 1) {
+ 80003a4:	2001      	movs	r0, #1
+ 80003a6:	f7ff ff67 	bl	8000278 <isButtonPressed>
  80003aa:	4603      	mov	r3, r0
  80003ac:	2b01      	cmp	r3, #1
- 80003ae:	d170      	bne.n	8000492 <fsm_simple_buttons_run+0x18a>
-      status = AUTO_DEC_STATE;
- 80003b0:	4b3a      	ldr	r3, [pc, #232]	; (800049c <fsm_simple_buttons_run+0x194>)
- 80003b2:	220b      	movs	r2, #11
- 80003b4:	601a      	str	r2, [r3, #0]
-      setTimer(DEC_TIME, AUTO_DEC_TIMER);
- 80003b6:	2100      	movs	r1, #0
- 80003b8:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
- 80003bc:	f000 fac4 	bl	8000948 <setTimer>
-    }
-    break;
- 80003c0:	e067      	b.n	8000492 <fsm_simple_buttons_run+0x18a>
-  case RESET_STATE:
-	counter = 0;
- 80003c2:	4b37      	ldr	r3, [pc, #220]	; (80004a0 <fsm_simple_buttons_run+0x198>)
- 80003c4:	2200      	movs	r2, #0
- 80003c6:	601a      	str	r2, [r3, #0]
-	status = IDLE_STATE;
- 80003c8:	4b34      	ldr	r3, [pc, #208]	; (800049c <fsm_simple_buttons_run+0x194>)
- 80003ca:	2201      	movs	r2, #1
- 80003cc:	601a      	str	r2, [r3, #0]
-	setTimer(AUTO_TIME, AUTO_DEC_TIMER);
- 80003ce:	2100      	movs	r1, #0
- 80003d0:	f242 7010 	movw	r0, #10000	; 0x2710
- 80003d4:	f000 fab8 	bl	8000948 <setTimer>
-	break;
- 80003d8:	e05e      	b.n	8000498 <fsm_simple_buttons_run+0x190>
-  case INC_STATE:
-	inc_counter();
- 80003da:	f7ff ff6d 	bl	80002b8 <inc_counter>
-	status = IDLE_STATE;
- 80003de:	4b2f      	ldr	r3, [pc, #188]	; (800049c <fsm_simple_buttons_run+0x194>)
- 80003e0:	2201      	movs	r2, #1
- 80003e2:	601a      	str	r2, [r3, #0]
-	setTimer(AUTO_TIME, AUTO_DEC_TIMER);
- 80003e4:	2100      	movs	r1, #0
- 80003e6:	f242 7010 	movw	r0, #10000	; 0x2710
- 80003ea:	f000 faad 	bl	8000948 <setTimer>
-	break;
- 80003ee:	e053      	b.n	8000498 <fsm_simple_buttons_run+0x190>
-  case DEC_STATE:
-	dec_counter();
- 80003f0:	f7ff ff76 	bl	80002e0 <dec_counter>
-	status = IDLE_STATE;
- 80003f4:	4b29      	ldr	r3, [pc, #164]	; (800049c <fsm_simple_buttons_run+0x194>)
- 80003f6:	2201      	movs	r2, #1
- 80003f8:	601a      	str	r2, [r3, #0]
-	setTimer(AUTO_TIME, AUTO_DEC_TIMER);
- 80003fa:	2100      	movs	r1, #0
- 80003fc:	f242 7010 	movw	r0, #10000	; 0x2710
- 8000400:	f000 faa2 	bl	8000948 <setTimer>
-	break;
- 8000404:	e048      	b.n	8000498 <fsm_simple_buttons_run+0x190>
-  case AUTO_DEC_STATE:
-	display7SEG(counter);
- 8000406:	4b26      	ldr	r3, [pc, #152]	; (80004a0 <fsm_simple_buttons_run+0x198>)
- 8000408:	681b      	ldr	r3, [r3, #0]
- 800040a:	4618      	mov	r0, r3
- 800040c:	f000 f8d8 	bl	80005c0 <display7SEG>
-	if(isTimerOut(AUTO_DEC_TIMER) == 1) {
- 8000410:	2000      	movs	r0, #0
- 8000412:	f000 fabf 	bl	8000994 <isTimerOut>
- 8000416:	4603      	mov	r3, r0
- 8000418:	2b01      	cmp	r3, #1
- 800041a:	d110      	bne.n	800043e <fsm_simple_buttons_run+0x136>
-	  if(counter > 0) {
- 800041c:	4b20      	ldr	r3, [pc, #128]	; (80004a0 <fsm_simple_buttons_run+0x198>)
- 800041e:	681b      	ldr	r3, [r3, #0]
- 8000420:	2b00      	cmp	r3, #0
- 8000422:	dd04      	ble.n	800042e <fsm_simple_buttons_run+0x126>
-	    counter--;
- 8000424:	4b1e      	ldr	r3, [pc, #120]	; (80004a0 <fsm_simple_buttons_run+0x198>)
- 8000426:	681b      	ldr	r3, [r3, #0]
- 8000428:	3b01      	subs	r3, #1
- 800042a:	4a1d      	ldr	r2, [pc, #116]	; (80004a0 <fsm_simple_buttons_run+0x198>)
- 800042c:	6013      	str	r3, [r2, #0]
-	  }
-	  status = AUTO_DEC_STATE;
- 800042e:	4b1b      	ldr	r3, [pc, #108]	; (800049c <fsm_simple_buttons_run+0x194>)
- 8000430:	220b      	movs	r2, #11
- 8000432:	601a      	str	r2, [r3, #0]
-	  setTimer(DEC_TIME, AUTO_DEC_TIMER);
- 8000434:	2100      	movs	r1, #0
- 8000436:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
- 800043a:	f000 fa85 	bl	8000948 <setTimer>
-	}
-    if(isButtonPressed(RESET_BUTTON) == 1) {
- 800043e:	2000      	movs	r0, #0
- 8000440:	f7ff ff1a 	bl	8000278 <isButtonPressed>
- 8000444:	4603      	mov	r3, r0
- 8000446:	2b01      	cmp	r3, #1
- 8000448:	d102      	bne.n	8000450 <fsm_simple_buttons_run+0x148>
-      status = RESET_STATE;
- 800044a:	4b14      	ldr	r3, [pc, #80]	; (800049c <fsm_simple_buttons_run+0x194>)
- 800044c:	2202      	movs	r2, #2
- 800044e:	601a      	str	r2, [r3, #0]
-    }
-    if(isButtonPressed(INC_BUTTON) == 1) {
- 8000450:	2001      	movs	r0, #1
- 8000452:	f7ff ff11 	bl	8000278 <isButtonPressed>
- 8000456:	4603      	mov	r3, r0
- 8000458:	2b01      	cmp	r3, #1
- 800045a:	d102      	bne.n	8000462 <fsm_simple_buttons_run+0x15a>
+ 80003ae:	d102      	bne.n	80003b6 <fsm_simple_buttons_run+0x8a>
       status = INC_STATE;
- 800045c:	4b0f      	ldr	r3, [pc, #60]	; (800049c <fsm_simple_buttons_run+0x194>)
- 800045e:	2203      	movs	r2, #3
- 8000460:	601a      	str	r2, [r3, #0]
+ 80003b0:	4b3a      	ldr	r3, [pc, #232]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 80003b2:	2203      	movs	r2, #3
+ 80003b4:	601a      	str	r2, [r3, #0]
     }
     if(isButtonPressed(DEC_BUTTON) == 1) {
- 8000462:	2002      	movs	r0, #2
- 8000464:	f7ff ff08 	bl	8000278 <isButtonPressed>
- 8000468:	4603      	mov	r3, r0
- 800046a:	2b01      	cmp	r3, #1
- 800046c:	d102      	bne.n	8000474 <fsm_simple_buttons_run+0x16c>
+ 80003b6:	2002      	movs	r0, #2
+ 80003b8:	f7ff ff5e 	bl	8000278 <isButtonPressed>
+ 80003bc:	4603      	mov	r3, r0
+ 80003be:	2b01      	cmp	r3, #1
+ 80003c0:	d102      	bne.n	80003c8 <fsm_simple_buttons_run+0x9c>
       status = DEC_STATE;
- 800046e:	4b0b      	ldr	r3, [pc, #44]	; (800049c <fsm_simple_buttons_run+0x194>)
- 8000470:	2204      	movs	r2, #4
- 8000472:	601a      	str	r2, [r3, #0]
+ 80003c2:	4b36      	ldr	r3, [pc, #216]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 80003c4:	2204      	movs	r2, #4
+ 80003c6:	601a      	str	r2, [r3, #0]
     }
     if(isTimerOut(AUTO_DEC_TIMER) == 1) {
- 8000474:	2000      	movs	r0, #0
- 8000476:	f000 fa8d 	bl	8000994 <isTimerOut>
- 800047a:	4603      	mov	r3, r0
- 800047c:	2b01      	cmp	r3, #1
- 800047e:	d10a      	bne.n	8000496 <fsm_simple_buttons_run+0x18e>
+ 80003c8:	2000      	movs	r0, #0
+ 80003ca:	f000 fae3 	bl	8000994 <isTimerOut>
+ 80003ce:	4603      	mov	r3, r0
+ 80003d0:	2b01      	cmp	r3, #1
+ 80003d2:	d15d      	bne.n	8000490 <fsm_simple_buttons_run+0x164>
       status = AUTO_DEC_STATE;
- 8000480:	4b06      	ldr	r3, [pc, #24]	; (800049c <fsm_simple_buttons_run+0x194>)
- 8000482:	220b      	movs	r2, #11
- 8000484:	601a      	str	r2, [r3, #0]
+ 80003d4:	4b31      	ldr	r3, [pc, #196]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 80003d6:	220b      	movs	r2, #11
+ 80003d8:	601a      	str	r2, [r3, #0]
+      auto_dec();
+ 80003da:	f7ff ff95 	bl	8000308 <auto_dec>
       setTimer(DEC_TIME, AUTO_DEC_TIMER);
- 8000486:	2100      	movs	r1, #0
- 8000488:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
- 800048c:	f000 fa5c 	bl	8000948 <setTimer>
+ 80003de:	2100      	movs	r1, #0
+ 80003e0:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
+ 80003e4:	f000 fab0 	bl	8000948 <setTimer>
     }
     break;
- 8000490:	e001      	b.n	8000496 <fsm_simple_buttons_run+0x18e>
+ 80003e8:	e052      	b.n	8000490 <fsm_simple_buttons_run+0x164>
+  case RESET_STATE:
+	counter = 0;
+ 80003ea:	4b2d      	ldr	r3, [pc, #180]	; (80004a0 <fsm_simple_buttons_run+0x174>)
+ 80003ec:	2200      	movs	r2, #0
+ 80003ee:	601a      	str	r2, [r3, #0]
+	status = IDLE_STATE;
+ 80003f0:	4b2a      	ldr	r3, [pc, #168]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 80003f2:	2201      	movs	r2, #1
+ 80003f4:	601a      	str	r2, [r3, #0]
+	setTimer(AUTO_TIME, AUTO_DEC_TIMER);
+ 80003f6:	2100      	movs	r1, #0
+ 80003f8:	f242 7010 	movw	r0, #10000	; 0x2710
+ 80003fc:	f000 faa4 	bl	8000948 <setTimer>
+	break;
+ 8000400:	e049      	b.n	8000496 <fsm_simple_buttons_run+0x16a>
+  case INC_STATE:
+	inc_counter();
+ 8000402:	f7ff ff59 	bl	80002b8 <inc_counter>
+	status = IDLE_STATE;
+ 8000406:	4b25      	ldr	r3, [pc, #148]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 8000408:	2201      	movs	r2, #1
+ 800040a:	601a      	str	r2, [r3, #0]
+	setTimer(AUTO_TIME, AUTO_DEC_TIMER);
+ 800040c:	2100      	movs	r1, #0
+ 800040e:	f242 7010 	movw	r0, #10000	; 0x2710
+ 8000412:	f000 fa99 	bl	8000948 <setTimer>
+	break;
+ 8000416:	e03e      	b.n	8000496 <fsm_simple_buttons_run+0x16a>
+  case DEC_STATE:
+	dec_counter();
+ 8000418:	f7ff ff62 	bl	80002e0 <dec_counter>
+	status = IDLE_STATE;
+ 800041c:	4b1f      	ldr	r3, [pc, #124]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 800041e:	2201      	movs	r2, #1
+ 8000420:	601a      	str	r2, [r3, #0]
+	setTimer(AUTO_TIME, AUTO_DEC_TIMER);
+ 8000422:	2100      	movs	r1, #0
+ 8000424:	f242 7010 	movw	r0, #10000	; 0x2710
+ 8000428:	f000 fa8e 	bl	8000948 <setTimer>
+	break;
+ 800042c:	e033      	b.n	8000496 <fsm_simple_buttons_run+0x16a>
+  case AUTO_DEC_STATE:
+	display7SEG(counter);
+ 800042e:	4b1c      	ldr	r3, [pc, #112]	; (80004a0 <fsm_simple_buttons_run+0x174>)
+ 8000430:	681b      	ldr	r3, [r3, #0]
+ 8000432:	4618      	mov	r0, r3
+ 8000434:	f000 f8c4 	bl	80005c0 <display7SEG>
+	if(isTimerOut(AUTO_DEC_TIMER) == 1) {
+ 8000438:	2000      	movs	r0, #0
+ 800043a:	f000 faab 	bl	8000994 <isTimerOut>
+ 800043e:	4603      	mov	r3, r0
+ 8000440:	2b01      	cmp	r3, #1
+ 8000442:	d109      	bne.n	8000458 <fsm_simple_buttons_run+0x12c>
+	  auto_dec();
+ 8000444:	f7ff ff60 	bl	8000308 <auto_dec>
+	  status = AUTO_DEC_STATE;
+ 8000448:	4b14      	ldr	r3, [pc, #80]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 800044a:	220b      	movs	r2, #11
+ 800044c:	601a      	str	r2, [r3, #0]
+	  setTimer(DEC_TIME, AUTO_DEC_TIMER);
+ 800044e:	2100      	movs	r1, #0
+ 8000450:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
+ 8000454:	f000 fa78 	bl	8000948 <setTimer>
+	}
+    if(isButtonPressed(RESET_BUTTON) == 1) {
+ 8000458:	2000      	movs	r0, #0
+ 800045a:	f7ff ff0d 	bl	8000278 <isButtonPressed>
+ 800045e:	4603      	mov	r3, r0
+ 8000460:	2b01      	cmp	r3, #1
+ 8000462:	d102      	bne.n	800046a <fsm_simple_buttons_run+0x13e>
+      status = RESET_STATE;
+ 8000464:	4b0d      	ldr	r3, [pc, #52]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 8000466:	2202      	movs	r2, #2
+ 8000468:	601a      	str	r2, [r3, #0]
+    }
+    if(isButtonPressed(INC_BUTTON) == 1) {
+ 800046a:	2001      	movs	r0, #1
+ 800046c:	f7ff ff04 	bl	8000278 <isButtonPressed>
+ 8000470:	4603      	mov	r3, r0
+ 8000472:	2b01      	cmp	r3, #1
+ 8000474:	d102      	bne.n	800047c <fsm_simple_buttons_run+0x150>
+      status = INC_STATE;
+ 8000476:	4b09      	ldr	r3, [pc, #36]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 8000478:	2203      	movs	r2, #3
+ 800047a:	601a      	str	r2, [r3, #0]
+    }
+    if(isButtonPressed(DEC_BUTTON) == 1) {
+ 800047c:	2002      	movs	r0, #2
+ 800047e:	f7ff fefb 	bl	8000278 <isButtonPressed>
+ 8000482:	4603      	mov	r3, r0
+ 8000484:	2b01      	cmp	r3, #1
+ 8000486:	d105      	bne.n	8000494 <fsm_simple_buttons_run+0x168>
+      status = DEC_STATE;
+ 8000488:	4b04      	ldr	r3, [pc, #16]	; (800049c <fsm_simple_buttons_run+0x170>)
+ 800048a:	2204      	movs	r2, #4
+ 800048c:	601a      	str	r2, [r3, #0]
+    }
     break;
- 8000492:	bf00      	nop
- 8000494:	e000      	b.n	8000498 <fsm_simple_buttons_run+0x190>
+ 800048e:	e001      	b.n	8000494 <fsm_simple_buttons_run+0x168>
     break;
- 8000496:	bf00      	nop
+ 8000490:	bf00      	nop
+ 8000492:	e000      	b.n	8000496 <fsm_simple_buttons_run+0x16a>
+    break;
+ 8000494:	bf00      	nop
   }
 }
- 8000498:	bf00      	nop
- 800049a:	bd80      	pop	{r7, pc}
+ 8000496:	bf00      	nop
+ 8000498:	bd80      	pop	{r7, pc}
+ 800049a:	bf00      	nop
  800049c:	200000a8 	.word	0x200000a8
  80004a0:	200000a4 	.word	0x200000a4
 
@@ -589,7 +592,7 @@ void fsm_led_blinky(void) {
  80004c2:	601a      	str	r2, [r3, #0]
 	setTimer(BLINK_TIME, BLINK_TIMER);
  80004c4:	2101      	movs	r1, #1
- 80004c6:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 80004c6:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
  80004ca:	f000 fa3d 	bl	8000948 <setTimer>
     break;
  80004ce:	e026      	b.n	800051e <fsm_led_blinky+0x7a>
@@ -608,7 +611,7 @@ void fsm_led_blinky(void) {
  80004e6:	601a      	str	r2, [r3, #0]
 	  setTimer(BLINK_TIME, BLINK_TIMER);
  80004e8:	2101      	movs	r1, #1
- 80004ea:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 80004ea:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
  80004ee:	f000 fa2b 	bl	8000948 <setTimer>
 	break;
  80004f2:	e011      	b.n	8000518 <fsm_led_blinky+0x74>
@@ -627,7 +630,7 @@ void fsm_led_blinky(void) {
  800050a:	601a      	str	r2, [r3, #0]
 	  setTimer(BLINK_TIME, BLINK_TIMER);
  800050c:	2101      	movs	r1, #1
- 800050e:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 800050e:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
  8000512:	f000 fa19 	bl	8000948 <setTimer>
 	break;
  8000516:	e001      	b.n	800051c <fsm_led_blinky+0x78>
@@ -824,7 +827,7 @@ int main(void)
   while (1)
   {
 	fsm_simple_buttons_run();
- 800062a:	f7ff fe6d 	bl	8000308 <fsm_simple_buttons_run>
+ 800062a:	f7ff fe7f 	bl	800032c <fsm_simple_buttons_run>
 	fsm_led_blinky();
  800062e:	f7ff ff39 	bl	80004a4 <fsm_led_blinky>
 	fsm_simple_buttons_run();
